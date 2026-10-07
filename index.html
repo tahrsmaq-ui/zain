@@ -164,15 +164,14 @@
 .card-img-container {
       position: relative;
       width: 100%;
-      height: 220px; /* قم زيادة الارتفاع قليلاً ليناسب عرض الشاشة (كانت 190px) */
-      background-color: #0f172a;
+      height: 250px; /* زيادة الارتفاع قليلاً لتعرض الصورة كاملة براحتها */
+      background-color: #0f172a; /* لون الخلفية الداكن ليتناسق مع تصميم الموقع */
     }
 
     .card-img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* لملء المساحة بالعرض والطول بدون أي فراغات جانبية */
-    
+      object-fit: contain; /* تعرض الصورة كاملة 100% بدون أي قص نهائياً */
     }
     .price-badges {
       position: absolute;
