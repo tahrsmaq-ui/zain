@@ -161,16 +161,16 @@
       justify-content: space-between;
       box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
-.card-img-container {
+    .card-img-container {
       position: relative;
       width: 100%;
-      height: auto !important; /* إلغاء الارتفاع الثابت عشان تاخد طولها الطبيعي كاملة */
+      height: auto !important;
       background-color: #0f172a;
     }
 
     .card-img {
       width: 100% !important;
-      height: auto !important; /* لتعرض الصورة بكامل طولها وعرضها الحقيقي بدون أي قص */
+      height: auto !important;
       display: block;
       object-fit: unset !important;
     }
@@ -406,7 +406,7 @@
   <div id="cart-bar" class="cart-bar">
     <div class="cart-info">
       <span id="cart-count-text" class="cart-count">الطلب: 0 عنصر</span>
-      <span id="cart-total-text" class="cart-total">المجموع: 0 TL / 0 syr</span>
+      <span id="cart-total-text" class="cart-total">المجموع: 0 TL / 0 SYR</span>
     </div>
     <a href="#" id="whatsapp-order-btn" class="send-whatsapp-btn" target="_blank">
       <i class="fab fa-whatsapp"></i> إرسال الطلب
@@ -493,7 +493,7 @@
           });
 
           const priceTryNum = parseFloat((item.price_try || item.price || '0').toString().replace(/[^0-9.]/g, '')) || 0;
-          const priceSNum = parseFloat((item.price_s || item.price_syp || '0').toString().replace(/[^0-9.]/g, '')) || 0;
+          const priceSNum = parseFloat((item.price_syr || item.price_s || item.price_syp || '0').toString().replace(/[^0-9.]/g, '')) || 0;
 
           return {
             title: item.title || item['عنوان'] || '',
@@ -530,7 +530,7 @@
               <img src="${imagePath}" alt="${item.title}" class="card-img" onerror="this.src='images/default.jpg'">
               <div class="price-badges">
                 <span class="badge-try">${item.price_try} TL</span>
-                <span class="badge-syp">${item.price_s} S</span>
+                <span class="badge-syp">${item.price_s} SYR</span>
               </div>
             </div>
             <div class="card-body">
@@ -607,13 +607,13 @@
         totalItems += qty;
         totalTry += item.price_try * qty;
         totalSyp += item.price_s * qty;
-        messageLines.push(`• ${item.title} (العدد: ${qty}) - ${item.price_try * qty} TL / ${item.price_s * qty} S`);
+        messageLines.push(`• ${item.title} (العدد: ${qty}) - ${item.price_try * qty} TL / ${item.price_s * qty} SYR`);
       });
 
-      messageLines.push(`\n📌 الإجمالي الكلي: ${totalTry} TL / ${totalSyp} S`);
+      messageLines.push(`\n📌 الإجمالي الكلي: ${totalTry} TL / ${totalSyp} SYR`);
 
       cartCountText.innerText = `الطلب: ${totalItems} عناصر`;
-      cartTotalText.innerText = `المجموع: ${totalTry} TL / ${totalSyp} S`;
+      cartTotalText.innerText = `المجموع: ${totalTry} TL / ${totalSyp} SYR`;
 
       const whatsappText = encodeURIComponent(messageLines.join('\n'));
       whatsappBtn.href = `https://wa.me/${restaurantPhoneNumber}?text=${whatsappText}`;
