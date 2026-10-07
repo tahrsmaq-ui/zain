@@ -161,19 +161,18 @@
       justify-content: space-between;
       box-shadow: 0 4px 6px rgba(0,0,0,0.3);
     }
-
-    .card-img-container {
+.card-img-container {
       position: relative;
       width: 100%;
-      height: 190px;
+      height: 220px; /* قم زيادة الارتفاع قليلاً ليناسب عرض الشاشة (كانت 190px) */
       background-color: #0f172a;
     }
 
- .card-img {
+    .card-img {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* هذه الخاصية تعرض الصورة كاملة بدون أي قص */
-      background-color: #0f172a; /* لون خلفية يملأ الفراغات الجانبية إن وجدت */
+      object-fit: cover; /* لملء المساحة بالعرض والطول بدون أي فراغات جانبية */
+    
     }
     .price-badges {
       position: absolute;
