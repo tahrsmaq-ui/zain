@@ -22,10 +22,34 @@
     }
 
     .header {
-      background-color: #1e293b;
+      position: relative;
+      background-image: url('images/logob.jpg'); /* صورة الخلفية المخصصة */
+      background-size: cover;
+      background-position: center;
       text-align: center;
-      padding: 25px 20px 20px 20px;
+      padding: 35px 20px;
+      border-radius: 0 0 25px 25px;
       border-bottom: 2px solid #ff9800;
+      overflow: hidden;
+    }
+
+    /* طبقة تظليل فوق صورة الخلفية لضمان وضوح النصوص وقراءتها بسلاسة */
+    .header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(15, 23, 42, 0.85);
+      z-index: 1;
+    }
+
+    /* لضمان بقاء اللوغو والنصوص فوق طبقة التظليل والصورة */
+    .header .logo-wrapper,
+    .header .banner-content {
+      position: relative;
+      z-index: 2;
     }
 
     .logo-wrapper {
@@ -52,7 +76,7 @@
     }
 
     .header p {
-      color: #94a3b8;
+      color: #cbd5e1;
       font-size: 0.95rem;
     }
 
@@ -344,8 +368,10 @@
     <div class="logo-wrapper">
       <img src="images/logo.jpg" alt="شاورما الزين" class="main-logo" onerror="this.src='images/logo.png'">
     </div>
-    <h1>شاورما الزين</h1>
-    <p>أطيب الوجبات الغربية والشاورما والمقبلات - اختر وجباتك وأرسل الطلب عبر الواتساب</p>
+    <div class="banner-content">
+      <h1>شاورما الزين</h1>
+      <p>أطيب الوجبات الغربية والشاورما والمقبلات - اختر وجباتك وأرسل الطلب عبر الواتساب</p>
+    </div>
   </header>
 
   <div class="categories-wrapper">
@@ -370,7 +396,7 @@
   </main>
 
   <footer class="developer-footer">
-    <p>تصميم وتطوير الموقع بواسطة: <strong style="color: #f8fafc;">عبدالله  سماق</strong></p>
+    <p>تصميم وتطوير الموقع بواسطة: <strong style="color: #f8fafc;">عبدالله سماق</strong></p>
     <p style="margin-top: 4px;">لطلب مواقع إلكترونية أو المنيو الرقمي التواصل عبر:</p>
     <div class="developer-links">
       <a href="https://wa.me/963932510043" target="_blank"><i class="fab fa-whatsapp"></i> +963 932 510 043</a>
@@ -394,11 +420,9 @@
     const sheetUrl = 'https://docs.google.com/spreadsheets/d/1AwuHd2YCOUpzJKTbj70x_8B-MuzFWGkRTvcL2YRlxdE/gviz/tq?tqx=out:csv';
     const restaurantPhoneNumber = "963995829459";
 
-    // جلب البيانات مع تخزين مؤقت ومهلة زمنية لمنع التعليق
     async function loadMenu() {
       const cachedData = localStorage.getItem('alZainMenuData');
       
-      // إذا كانت هناك بيانات محفوظة سابقاً في متصفح المستخدم، اعرضها مباشرة فوراً
       if (cachedData) {
         try {
           fullMenuData = JSON.parse(cachedData);
@@ -406,9 +430,8 @@
         } catch(e) {}
       }
 
-      // جلب أحدث البيانات من Google Sheets بالخلفية
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 4000); // 4 ثوان كحد أقصى للانتظار
+      const timeoutId = setTimeout(() => controller.abort(), 4000);
 
       try {
         const response = await fetch(sheetUrl, { signal: controller.signal });
@@ -616,7 +639,7 @@
             return cat.includes('western-sand') || (cat.includes('west') && cat.includes('sand'));
           } else if (category === 'shawarma-meals') {
             return cat.includes('shawarma-meal') || (cat.includes('shawarma') && cat.includes('meal'));
-          } else if (category === 'western-meals') {
+          } else if (category === `western-meals`) {
             return cat.includes('western-meal') || (cat.includes('west') && cat.includes('meal'));
           } else if (category === 'grilled-chicken') {
             return cat.includes('grilled') || cat.includes('chicken') || cat.includes('فروج') || cat.includes('مشوي');
