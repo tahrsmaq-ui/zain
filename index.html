@@ -164,14 +164,15 @@
 .card-img-container {
       position: relative;
       width: 100%;
-      height: 250px; /* زيادة الارتفاع قليلاً لتعرض الصورة كاملة براحتها */
-      background-color: #0f172a; /* لون الخلفية الداكن ليتناسق مع تصميم الموقع */
+      height: auto !important; /* إلغاء الارتفاع الثابت عشان تاخد طولها الطبيعي كاملة */
+      background-color: #0f172a;
     }
 
     .card-img {
-      width: 100%;
-      height: 100%;
-      object-fit: contain; /* تعرض الصورة كاملة 100% بدون أي قص نهائياً */
+      width: 100% !important;
+      height: auto !important; /* لتعرض الصورة بكامل طولها وعرضها الحقيقي بدون أي قص */
+      display: block;
+      object-fit: unset !important;
     }
     .price-badges {
       position: absolute;
